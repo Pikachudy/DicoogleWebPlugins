@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import TodoItems from "./TodoItems.jsx";
 import PatientInf from "./PatientInf.jsx";
+import ImageSelect from "./ImageSelect.jsx";
 /* global Dicoogle */
 const steps = [
     {
@@ -69,6 +70,10 @@ class TodoApp extends React.Component {
                 age:1,
                 illness:"",
                 illnessDes:""
+            },
+            imageInfo:{
+                name:"",
+                url:""
             }
         };
         this.next = this.next.bind(this);
@@ -89,10 +94,24 @@ class TodoApp extends React.Component {
             );
         })
     }
+    editImageInfo = (newVal)=>{
+        this.setState({imageInfo:newVal},()=>{
+            alert(
+                "选中的图片信息:\n"+
+                this.state.imageInfo.name+"\n"+
+                this.state.imageInfo.url+"\n"
+            )
+        })
+    }
 
     next() {
-        if(this.state.current===0){
-            this.PatientInf.flashInfo();
+        switch (this.state.current){
+            case 0:
+                this.PatientInf.flashInfo();
+                break;
+            case 1:
+                this.ImageSelect.flashInfo();
+                break;
         }
         this.setState({current: this.state.current + 1});
     }
@@ -113,6 +132,9 @@ class TodoApp extends React.Component {
     }
     onRefPatientInf = (ref) => {
         this.PatientInf = ref
+    }
+    onRefImageSelect = (ref)=>{
+        this.ImageSelect = ref;
     }
     render() {
         return (
@@ -136,7 +158,10 @@ class TodoApp extends React.Component {
                         ></PatientInf>
                     )}
                     {this.state.current === 1 && (
-                        <TodoItems items={this.state.items}/>
+                        <ImageSelect
+                            editImageInfo={this.editImageInfo}
+                            onRef={this.onRefImageSelect}
+                        ></ImageSelect>
                     )}
                     {this.state.current === 2 && (
                         <h2>组件3</h2>
