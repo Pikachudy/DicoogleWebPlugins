@@ -21,6 +21,10 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test:/.(jpg|png|svg)$/,
+        use: ['url-loader']
       }
     ]
   },

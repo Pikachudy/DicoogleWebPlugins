@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import TodoItems from "./TodoItems.jsx";
 import PatientInf from "./PatientInf.jsx";
 import ImageSelect from "./ImageSelect.jsx";
 /* global Dicoogle */
@@ -45,16 +44,9 @@ const styles = {
         borderRadius: "4px"
     },
     MineComponent:{
-        marginTop:"3%",
         height: "50%"
     }
 }
-// function TodoItems(props) {
-//     const createItem = (itemText, i) => {
-//         return <li key={i}>{itemText}</li>;
-//     };
-//     return <ul>{props.items.map(createItem)}</ul>;
-// }
 
 class TodoApp extends React.Component {
     constructor(props) {
@@ -85,6 +77,7 @@ class TodoApp extends React.Component {
     editPatientInfo = (newVal)=>{
         this.setState({patientInfo: newVal},()=>{
             alert(
+                "(此alert仅在测试时为了确认已获取输入值，可使用其发送请求)\n"+
                 this.state.patientInfo.name+'\n'+
                 this.state.patientInfo.id+'\n'+
                 this.state.patientInfo.gender+'\n'+
@@ -97,6 +90,7 @@ class TodoApp extends React.Component {
     editImageInfo = (newVal)=>{
         this.setState({imageInfo:newVal},()=>{
             alert(
+                "(此alert仅在测试时为了确认已获取输入值，可使用其发送请求)\n"+
                 "选中的图片信息:\n"+
                 this.state.imageInfo.name+"\n"+
                 this.state.imageInfo.url+"\n"
@@ -139,17 +133,6 @@ class TodoApp extends React.Component {
     render() {
         return (
             <div>
-                <form>
-                    <input type="text" placeholder="Free text or advanced query" style={styles.input_css}></input>
-                    <button type="submit" style={styles.btn_css}> Search</button>
-                </form>
-                {/*<h3>TODO List:</h3>*/}
-                {/*<TodoItems items={this.state.items}/>*/}
-
-                {/*<form onSubmit={this.handleSubmit}>*/}
-                {/*    <input onChange={this.onChange} value={this.state.text}/>*/}
-                {/*    <button>{'Add #' + (this.state.items.length + 1)}</button>*/}
-                {/*</form>*/}
                 <div style={styles.MineComponent}>
                     {this.state.current === 0 && (
                         <PatientInf
@@ -164,7 +147,10 @@ class TodoApp extends React.Component {
                         ></ImageSelect>
                     )}
                     {this.state.current === 2 && (
-                        <h2>组件3</h2>
+                        <div>
+                            <h2>界面3</h2>
+                            <h3>此处应为预测模型位置，待确认后再挂载前端组件</h3>
+                        </div>
                     )}
                 </div>
                 <div
